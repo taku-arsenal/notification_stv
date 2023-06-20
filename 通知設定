@@ -1,0 +1,15 @@
+function sendLineNotify(message) {
+  var accessToken = "eBBPrWwc7HcOzDbGg3TaEIc6I327hUkg0NGOdPft6YL"; // 発行したアクセストークンを設定
+  
+  var options = {
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer " + accessToken,
+    },
+    "payload": {
+      "message": message,
+    },
+  };
+  
+  UrlFetchApp.fetch("https://notify-api.line.me/api/notify", options);
+}
