@@ -1,0 +1,18 @@
+function getAllSpreadsheets() {
+  var files = DriveApp.getFilesByType(MimeType.GOOGLE_SHEETS);
+  var spreadsheets = [];
+  
+  while (files.hasNext()) {
+    var file = files.next();
+    var spreadsheet = SpreadsheetApp.openById(file.getId());
+    spreadsheets.push(spreadsheet);
+  }
+  
+  return spreadsheets;
+}
+
+// 使用例
+var allSpreadsheets = getAllSpreadsheets();
+for (var i = 0; i < allSpreadsheets.length; i++) {
+  Logger.log("Spreadsheet Name: " + allSpreadsheets[i].getName());
+}
