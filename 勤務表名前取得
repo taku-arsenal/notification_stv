@@ -1,0 +1,22 @@
+function getSheetName() {
+  var date = new Date(); // 現在の日付を取得する（もしくは任意の日付を指定する）
+  var day = date.getDate();
+  var month = date.getMonth() + 2;
+  var year = date.getFullYear();
+
+  var sheetName = "◇" + year + "年";
+
+  if (day <= 15) {
+    month = (month === 1) ? 12 : month - 1;
+    sheetName += month + ".16-" + month + 1 +".15";
+  } else {
+    sheetName += month - 1 + ".16-" + month + ".15";
+  }
+
+  sheetName += "新勤務表のコピー";
+  
+  
+Logger.log(sheetName);
+
+  return sheetName;
+}
