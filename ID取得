@@ -5,11 +5,6 @@ for (var i = 0; i < sheets.length; i++) {
 }
 
 function getSpreadsheetId(sheets) {
-  var spreadsheetId = spreadsheet.getId();
+  var spreadsheetId = sheets.getId();
   return spreadsheetId;
 }
-
-// 使用例
-var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-var spreadsheetId = getSpreadsheetId(spreadsheet);
-Logger.log("Spreadsheet ID: " + spreadsheetId);
