@@ -10,9 +10,3 @@ function getAllSpreadsheets() {
   
   return spreadsheets;
 }
-
-// 使用例
-var allSpreadsheets = getAllSpreadsheets();
-for (var i = 0; i < allSpreadsheets.length; i++) {
-  Logger.log("Spreadsheet Name: " + allSpreadsheets[i].getName());
-}
