@@ -13,10 +13,7 @@ function getSheetName() {
     sheetName += month - 1 + ".16-" + month + ".15";
   }
 
-  sheetName += "新勤務表のコピー";
-  
-  
-Logger.log(sheetName);
+  sheetName += "新勤務表";
 
   return sheetName;
 }
