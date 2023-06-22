@@ -1,23 +1,17 @@
 function getSheetByNameFromSpreadsheets(sheetName) {
   var allSpreadsheets = getAllSpreadsheets();
-  var matchingSheets = [];
-  
+
   for (var i = 0; i < allSpreadsheets.length; i++) {
     var spreadsheet = allSpreadsheets[i];
-    var sheet = spreadsheet.getSheetByName(sheetName);
-    
-    if (sheet) {
-      matchingSheets.push(sheet);
+    var sheets = spreadsheet.getSheets();
+
+    for (var j = 0; j < sheets.length; j++) {
+      var sheet = sheets[j];
+      if (sheet.getSheetName() === sheetName) {
+        return sheet.getParent();
+      }
     }
   }
   
-  return matchingSheets;
-}
-
-var sheetName = getSheetName()
-// 使用例
-var targetSheetName = sheetName;
-var sheets = getSheetByNameFromSpreadsheets(targetSheetName);
-for (var i = 0; i < sheets.length; i++) {
-  Logger.log("Matching Sheet Found in Spreadsheet: " + sheets[i].getName());
+  return null; // スプレッドシートが見つからなかった場合は null を返す
 }
