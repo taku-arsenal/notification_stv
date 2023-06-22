@@ -1,5 +1,5 @@
 function checkAndNotifyBlankCells() {
-  var targetRange = findCellAddress_super(); // セル範囲を取得する関数の呼び出し
+  var targetRange = findCellAddress(); // セル範囲を取得する関数の呼び出し
 
   var values = targetRange.getValues();
   var hasBlankCell = false;
