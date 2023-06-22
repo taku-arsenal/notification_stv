@@ -1,23 +1,15 @@
-function getSheetByNameFromSpreadsheets(sheetName) {
-  var allSpreadsheets = getAllSpreadsheets();
-  var matchingSheets = [];
-  
-  for (var i = 0; i < allSpreadsheets.length; i++) {
-    var spreadsheet = allSpreadsheets[i];
-    var sheet = spreadsheet.getSheetByName(sheetName);
-    
-    if (sheet) {
-      matchingSheets.push(sheet);
-    }
-  }
-  
-  return matchingSheets;
-}
-
 var sheetName = getSheetName()
-// 使用例
 var targetSheetName = sheetName;
 var sheets = getSheetByNameFromSpreadsheets(targetSheetName);
 for (var i = 0; i < sheets.length; i++) {
-  Logger.log("Matching Sheet Found in Spreadsheet: " + sheets[i].getName());
 }
+
+function getSpreadsheetId(sheets) {
+  var spreadsheetId = spreadsheet.getId();
+  return spreadsheetId;
+}
+
+// 使用例
+var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+var spreadsheetId = getSpreadsheetId(spreadsheet);
+Logger.log("Spreadsheet ID: " + spreadsheetId);
