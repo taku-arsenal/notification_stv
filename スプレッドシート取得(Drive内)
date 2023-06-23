@@ -1,4 +1,4 @@
-function getAllSpreadsheets() {
+function getAllSpreadsheets() { // 処理が重い場合は取得スプレッドシート数が増えている可能性があるのでこちらで全スプレッドシートではなく任意の有限個のシートを取得するように変更してください
   var files = DriveApp.getFilesByType(MimeType.GOOGLE_SHEETS);
   var spreadsheets = [];
   
