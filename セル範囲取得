@@ -1,7 +1,6 @@
 function findCellAddress_super() {
-  var sheetName = getSheetName(); // 勤務表の名前取得
-  var sheets = getSheetByNameFromSpreadsheets(sheetName) //勤務表の名前と一致するスプレッドシート取得
-  var spreadsheetId = getSpreadsheetId(sheets) //勤務表のID取得
+  var fileName = getFileName(); // 勤務表の名前取得
+  var spreadsheetId = getSpreadSheetId(fileName) // 勤務表の名前と一致するスプレッドシートのID取得
   var spreadsheet = SpreadsheetApp.openById(spreadsheetId); // スプレッドシートのIDを指定
   var sheet = spreadsheet.getSheetByName("シフト表"); // シート名を指定してシートを取得
   var date = new Date(); // 現在の日付を取得する（もしくは任意の日付を指定する）
