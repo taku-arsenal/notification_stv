@@ -1,0 +1,20 @@
+function getSpreadSheetId(fileName) {
+  var spreadsheets = getAllSpreadsheets(fileName);
+  
+  if (spreadsheets.length > 0) {
+    var spreadsheet = spreadsheets[0];
+    var spreadsheetId = spreadsheet.getId();
+    return spreadsheetId;
+  }
+  
+  return null; // スプレッドシートが見つからない場合は null を返す
+}
+
+var fileName = getFileName; // 確認したいファイル名を指定
+
+var fileId = getSpreadSheetId(fileName);
+if (fileId !== null) {
+  console.log("ファイルが見つかりました。ファイルID: " + fileId);
+} else {
+  console.log("ファイルが見つかりませんでした。");
+}
