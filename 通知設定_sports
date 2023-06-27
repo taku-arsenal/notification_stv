@@ -1,0 +1,15 @@
+function sendLineNotify_sports(message) {
+  var accessToken = "i0qcIEpeTPjG6P6fI55bx6DNc2eu2S3hAtQIllTzTIw"; // 発行したアクセストークンを設定
+  
+  var options = {
+    "method": "POST",
+    "headers": {
+      "Authorization": "Bearer " + accessToken,
+    },
+    "payload": {
+      "message": message,
+    },
+  };
+  
+  UrlFetchApp.fetch("https://notify-api.line.me/api/notify", options);
+}
