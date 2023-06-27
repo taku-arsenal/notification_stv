@@ -1,0 +1,38 @@
+function checkAndNotifyBlankCells_floor() {
+  var targetRange = findCellAddress_floor(); // セル範囲を取得する関数の呼び出し
+
+  var values = targetRange.getValues();
+  var hasBlankCell = false;
+  var message = "今週も一週間お疲れ様でした。来週のシフトですが"; // メッセージを初期化
+
+  // セル範囲内のブランクをチェック
+  for (var row = 0; row < values.length; row++) {
+    for (var col = 0; col < values[row].length; col++) {
+      if (values[row][col] === "") {
+        hasBlankCell = true;
+
+        // ブランクの位置に応じたメッセージを生成
+        if (row === 0) {
+          message += "、月";
+        } else if (row === 1) {
+          message += "、火";
+        } else if (row === 2) {
+          message += "、水";
+        } else if (row === 3) {
+          message += "、木";
+        } else if (row === 4) {
+          message += "、金";
+        }
+      }
+    }
+  }
+
+  // ブランクがある場合は通知を送信
+  if (hasBlankCell) {
+    message += "曜日が空いております。皆様予定はいかがでしょうか。\n※シートの変わり目は実際はシフトに入っていても空いていると判定されることがあります。"
+    sendLineNotify_floor(message);
+  } else {
+    message += "すべて埋まっております。ご協力ありがとうございました！"
+    sendLineNotify_floor(message);
+  }
+}
