@@ -1,4 +1,4 @@
-function checkAndNotifyBlankCells() {
+function checkAndNotifyBlankCells_super() {
   var targetRange = findCellAddress_super(); // セル範囲を取得する関数の呼び出し
 
   var values = targetRange.getValues();
