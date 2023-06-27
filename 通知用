@@ -30,9 +30,9 @@ function checkAndNotifyBlankCells() {
   // ブランクがある場合は通知を送信
   if (hasBlankCell) {
     message += "曜日が空いております。皆様予定はいかがでしょうか。\n※シートの変わり目は実際はシフトに入っていても空いていると判定されることがあります。"
-    sendLineNotify(message);
+    sendLineNotify_super(message);
   } else {
     message += "すべて埋まっております。ご協力ありがとうございました！"
-    sendLineNotify(message);
+    sendLineNotify_super(message);
   }
 }
