@@ -1,16 +1,20 @@
 function getSpreadSheetId(fileName) {
-  var spreadsheets = getAllSpreadsheets(fileName);
+  var spreadsheets = getAllSpreadsheets();
   
-  if (spreadsheets.length > 0) {
-    var spreadsheet = spreadsheets[0];
-    var spreadsheetId = spreadsheet.getId();
-    return spreadsheetId;
+  for (var i = 0; i < spreadsheets.length; i++) {
+    var spreadsheet = spreadsheets[i];
+    var name = spreadsheet.getName();
+
+    if (name === fileName) {
+      var spreadsheetId = spreadsheet.getId();
+      return spreadsheetId;
+    }
   }
   
   return null; // スプレッドシートが見つからない場合は null を返す
 }
 
-var fileName = getFileName; // 確認したいファイル名を指定
+var fileName = getFileName(); // 確認したいファイル名を指定
 
 var fileId = getSpreadSheetId(fileName);
 if (fileId !== null) {
