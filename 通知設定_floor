@@ -1,5 +1,5 @@
 function sendLineNotify_floor(message) {
-  var accessToken = "fuOl7IFrdADXH6g1fZ0dB6xsDZjSoOn8EmH0ZoxjvL6"; // 発行したアクセストークンを設定
+  var accessToken = "xxxxxxxxxxxxxx"; // 発行したアクセストークンを設定
   
   var options = {
     "method": "POST",
