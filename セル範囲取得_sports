@@ -16,11 +16,7 @@ function findCellAddress_sports() {
     var endRow = startRow + 4;
     var endColumn = startColumn;
     var targetRange = sheet.getRange(startRow, startColumn, endRow - startRow + 1, endColumn - startColumn + 1); // ターゲットの範囲を指定
-    return targetRange
-
-    var targetAddress = targetRange.getA1Notation(); // ターゲットの範囲のアドレスを取得
-    console.log("成功：" + targetAddress); // console.logで結果を見たければセル範囲取得.20を削除してください
-  
+    return targetRange;
   } else {
     console.log("失敗");
   }
