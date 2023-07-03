@@ -1,5 +1,5 @@
 function sendLineNotify_sports(message) {
-  var accessToken = "i0qcIEpeTPjG6P6fI55bx6DNc2eu2S3hAtQIllTzTIw"; // 発行したアクセストークンを設定
+  var accessToken = "xxxxxxxxxxxxxx"; // 発行したアクセストークンを設定
   
   var options = {
     "method": "POST",
