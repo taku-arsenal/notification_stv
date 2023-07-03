@@ -8,12 +8,15 @@ function getFileName() {
 
   if (day <= 15) {
     month = (month === 1) ? 12 : month - 1;
-    fileName += month + ".16-" + month + 1 +".15";
+    fileName += (month === 12 ? 1 : month - 1) + ".16-" + month + ".15";
   } else {
-    fileName += month - 1 + ".16-" + month + ".15";
+    month = (month === 1) ? 12 : month - 1;
+    fileName += month + ".16-" + (month === 12 ? 1 : month + 1) + ".15";
   }
 
-  fileName += "新勤務表のコピー";
+  fileName += "新勤務表";
 
   return fileName;
 }
+
+Logger.log(getFileName());
