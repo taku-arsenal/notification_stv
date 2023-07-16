@@ -1,0 +1,22 @@
+function findCellAddress_super() {
+  var spreadsheetId = "1rA2M-UnKvO4lLJeOGSmJdCrg1-IG_v6jKoxmnYj91BM"
+  var spreadsheet = SpreadsheetApp.openById(spreadsheetId); // スプレッドシートのIDを指定
+  var sheet = spreadsheet.getSheetByName("シフト表"); // シート名を指定してシートを取得
+  var date = new Date(); // 現在の日付を取得する（もしくは任意の日付を指定する）
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  var searchString = month + "月" + day + "日"; // 検索する文字列
+  
+  var range = sheet.createTextFinder(searchString).findNext(); // 文字列を検索して次の一致するセルを取得
+  
+  if (range) {
+    var startRow = range.getRow() + 3;
+    var startColumn = range.getColumn() + 5;
+    var endRow = startRow + 4;
+    var endColumn = startColumn;
+    var targetRange = sheet.getRange(startRow, startColumn, endRow - startRow + 1, endColumn - startColumn + 1); // ターゲットの範囲を指定
+    return targetRange;
+  } else {
+    console.log("失敗");
+  }
+}
