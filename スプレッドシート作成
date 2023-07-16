@@ -1,0 +1,40 @@
+function copySheetContent() {
+  var fileName = getFileName(); // 現在のファイル名を取得
+  var fileId = getSpreadSheetId(fileName);
+  var targetSpreadsheetId = "xxxxxxxx"; // シフト表_シフト通知用のIDを指定
+
+  // 対象スプレッドシートの内容を全て削除
+  var targetSpreadsheet = SpreadsheetApp.openById(targetSpreadsheetId);
+  var targetSheet = targetSpreadsheet.getActiveSheet();
+  var targetRange = targetSheet.getDataRange();
+  targetRange.clearContent();
+
+  // 現在のファイルのデータをコピー
+  var sourceSpreadsheet = SpreadsheetApp.openById(fileId);
+  var sourceSheet = sourceSpreadsheet.getSheetByName("シフト表");
+  var sourceRange = sourceSheet.getDataRange();
+  var sourceValues = sourceRange.getValues();
+
+  var targetRange = targetSheet.getRange(1, 1, sourceValues.length, sourceValues[0].length);
+  targetRange.setValues(sourceValues);
+
+  // 次のファイルのデータをコピー
+  var nextFileName = getFileName_next();
+  var nextFileId = getSpreadSheetId_next(nextFileName);
+
+  if (nextFileId) {
+    var nextSourceSpreadsheet = SpreadsheetApp.openById(nextFileId);
+    var nextSourceSheet = nextSourceSpreadsheet.getSheetByName("シフト表");
+    var nextSourceRange = nextSourceSheet.getDataRange();
+    var nextSourceValues = nextSourceRange.getValues();
+
+    var numRowsToAdd = nextSourceValues.length - 1;
+    var targetRangeLastRow = targetSheet.getLastRow();
+
+    // 現在のデータの最後の行の下に1行ずつ追加する
+    for (var i = 1; i <= numRowsToAdd; i++) {
+      var rowToAdd = nextSourceValues[i];
+      targetSheet.getRange(targetRangeLastRow + i, 1, 1, rowToAdd.length).setValues([rowToAdd]);
+    }
+  }
+}
