@@ -10,7 +10,7 @@ function findCellAddress_floor() {
   var range = sheet.createTextFinder(searchString).findNext(); // 文字列を検索して次の一致するセルを取得
   
   if (range) {
-    var startRow = range.getRow() + 3;
+    var startRow = range.getRow() + 4;
     var startColumn = range.getColumn() + 5;
     var endRow = startRow + 4;
     var endColumn = startColumn;
