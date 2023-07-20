@@ -11,7 +11,7 @@ function findCellAddress_floor() {
   
   if (range) {
     var startRow = range.getRow() + 4;
-    var startColumn = range.getColumn() + 5;
+    var startColumn = range.getColumn() + 8;
     var endRow = startRow + 4;
     var endColumn = startColumn;
     var targetRange = sheet.getRange(startRow, startColumn, endRow - startRow + 1, endColumn - startColumn + 1); // ターゲットの範囲を指定
