@@ -20,21 +20,23 @@ function copySheetContent() {
 
   // 次のファイルのデータをコピー
   var nextFileName = getFileName_next();
-  var nextFileId = getSpreadSheetId_next(nextFileName);
+  if (nextFileName) {
+    var nextFileId = getSpreadSheetId_next(nextFileName);
 
-  if (nextFileId) {
-    var nextSourceSpreadsheet = SpreadsheetApp.openById(nextFileId);
-    var nextSourceSheet = nextSourceSpreadsheet.getSheetByName("シフト表");
-    var nextSourceRange = nextSourceSheet.getDataRange();
-    var nextSourceValues = nextSourceRange.getValues();
+    if (nextFileId) {
+      var nextSourceSpreadsheet = SpreadsheetApp.openById(nextFileId);
+      var nextSourceSheet = nextSourceSpreadsheet.getSheetByName("シフト表");
+      var nextSourceRange = nextSourceSheet.getDataRange();
+      var nextSourceValues = nextSourceRange.getValues();
 
-    var numRowsToAdd = nextSourceValues.length - 1;
-    var targetRangeLastRow = targetSheet.getLastRow();
+      var numRowsToAdd = nextSourceValues.length - 1;
+      var targetRangeLastRow = targetSheet.getLastRow();
 
-    // 現在のデータの最後の行の下に1行ずつ追加する
-    for (var i = 1; i <= numRowsToAdd; i++) {
-      var rowToAdd = nextSourceValues[i];
-      targetSheet.getRange(targetRangeLastRow + i, 1, 1, rowToAdd.length).setValues([rowToAdd]);
+      // 現在のデータの最後の行の下に1行ずつ追加する
+      for (var i = 1; i <= numRowsToAdd; i++) {
+        var rowToAdd = nextSourceValues[i];
+        targetSheet.getRange(targetRangeLastRow + i, 1, 1, rowToAdd.length).setValues([rowToAdd]);
+      }
     }
   }
 }
