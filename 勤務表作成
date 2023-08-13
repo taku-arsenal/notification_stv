@@ -1,0 +1,83 @@
+function manipulateSpreadsheet() {
+  var fileName = getFileName();
+  var fileId = getSpreadSheetId(fileName);
+  var newFileName = getFileName_next();
+  
+  // 1. スプレッドシートをコピーして新しいファイルを作成
+  var copiedSpreadsheet = DriveApp.getFileById(fileId).makeCopy(newFileName);
+  var newFileId = copiedSpreadsheet.getId();
+  
+  // 2. 新しいファイルの名前を変更
+  var newSpreadsheet = SpreadsheetApp.openById(newFileId);
+  newSpreadsheet.rename(newFileName);
+  
+  // 3. シート"シフト表"の2行目以降を全て削除
+  var shiftSheet = newSpreadsheet.getSheetByName("シフト表");
+  shiftSheet.deleteRows(2, shiftSheet.getLastRow() - 1);
+  
+  // 4. シート"シフト表"に日付と曜日を記入
+  var startDate = new Date();
+  startDate.setMonth(startDate.getMonth() + 1);
+  startDate.setDate(16);
+  
+  var endDate = new Date();
+  endDate.setMonth(endDate.getMonth() + 2);
+  endDate.setDate(15);
+  
+  var currentDate = new Date(startDate);
+  var currentRow = 2; // A2から始まる行番号
+  var rangeA = shiftSheet.getRange("A2:A"); // 列Aの範囲
+  
+  var dayNames = ["日", "月", "火", "水", "木", "金", "土"];
+  
+  while (currentDate <= endDate) {
+    var dayOfWeek = dayNames[currentDate.getDay()];
+    
+    shiftSheet.getRange(currentRow, 1).setValue(currentDate);
+    shiftSheet.getRange(currentRow, 2).setValue(dayOfWeek);
+    
+    shiftSheet.getRange(currentRow, 1).setFontSize(14); // フォントサイズを設定
+    shiftSheet.getRange(currentRow, 2).setFontSize(14); // フォントサイズを設定
+    
+    currentDate.setDate(currentDate.getDate() + 1); // 次の日に移動
+    currentRow++; // 次の行に移動
+  }
+  
+  // 5. 曜日に基づいて背景色を設定
+  var lastRow = shiftSheet.getLastRow();
+  var rangeB2B = shiftSheet.getRange("B2:B" + lastRow);
+  
+  rangeB2B.setBackground("white"); // デフォルト色
+  
+  var weekendRange = shiftSheet.getRange("B2:B" + lastRow)
+    .createTextFinder("土|日")
+    .matchEntireCell(true)
+    .useRegularExpression(true)
+    .findAll();
+  
+  weekendRange.forEach(function(cell) {
+    cell.offset(0, 1, 1, 7).setBackground("#e0e0e0");
+    cell.offset(0, 1, 1, 7).setFontColor("white"); // 白字にする
+  });
+
+  // 6. 行の高さを固定する
+  shiftSheet.setRowHeights(2, lastRow - 1, 20); // ここで行の高さを20に設定
+  
+  // 7. 枠線を設定する
+  var rangeToApplyBorders = shiftSheet.getRange("A1:L" + lastRow);
+  rangeToApplyBorders.setBorder(true, true, true, true, true, true, "black", SpreadsheetApp.BorderStyle.SOLID);
+
+  // I列とJ列の間だけ枠線のスタイルを二重に設定
+  var rangeBetweenIJ = shiftSheet.getRange("I1:J" + lastRow);
+  rangeBetweenIJ.setBorder(null, null, null, null, true, null, "black", SpreadsheetApp.BorderStyle.DOUBLE); // 二重枠線
+
+  // シート"給与表"に情報を記入
+  var salarySheet = targetSpreadsheet.getSheetByName("給与表");
+  
+  var currentMonth = new Date().getMonth() + 1;
+  var nextMonth = (currentMonth + 1) % 12; // 12月の場合は1になる
+  
+  var salaryText = "どさんこワイド!!朝!" + new Date().getFullYear() + "年" + currentMonth + "月16日～" + nextMonth + "月15日分お給料";
+  
+  salarySheet.getRange("A2").setValue(salaryText);
+}
