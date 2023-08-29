@@ -3,9 +3,7 @@ function getFileName() {
   var day = date.getDate();
   var month = date.getMonth() + 1; // 1を加えて実際の月に合わせる
   var year = date.getFullYear();
-  var month = 12
-  var year = 2023
-  var day = 18
+
   // 15日以前かつ1月なら、前年の12月に設定
   if (day <= 15 && month === 1) {
     month = 12;
