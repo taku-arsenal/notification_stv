@@ -1,16 +1,30 @@
 function getFileName() {
   var date = new Date(); // 現在の日付を取得する（もしくは任意の日付を指定する）
   var day = date.getDate();
-  var month = date.getMonth() + 2;
+  var month = date.getMonth() + 1; // 1を加えて実際の月に合わせる
   var year = date.getFullYear();
+  var month = 12
+  var year = 2023
+  var day = 18
+  // 15日以前かつ1月なら、前年の12月に設定
+  if (day <= 15 && month === 1) {
+    month = 12;
+    year = year - 1;
+  } 
+  // それ以外で15日以前なら、前月に設定
+  else if (day <= 15) {
+    month = month - 1;
+  }
 
   var fileName = "◇" + year + "年";
 
+  // 15日以前なら、前月の16日から当月の15日まで
   if (day <= 15) {
-    month = (month === 1) ? 12 : month - 1;
-    fileName += (month === 12 ? 1 : month - 1) + ".16-" + month + ".15";
-  } else {
-    month = (month === 1) ? 12 : month - 1;
+    fileName += (month === 1 ? 12 : month) + ".16-" + (month === 12 ? 1 : month + 1) + ".15";
+}
+
+  // それ以外なら、当月の16日から次月の15日まで
+  else {
     fileName += month + ".16-" + (month === 12 ? 1 : month + 1) + ".15";
   }
 
