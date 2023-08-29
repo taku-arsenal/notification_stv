@@ -1,21 +1,23 @@
 function getFileName_next() {
   var date = new Date(); // 現在の日付を取得する（もしくは任意の日付を指定する）
   var day = date.getDate();
-  var month = date.getMonth() + 3;
+  var month = date.getMonth() + 1; // 1を加えて実際の月に合わせる
   var year = date.getFullYear();
 
-  if (month === 12) {
+  // 次の月に進む
+  month = (month === 12) ? 1 : month + 1;
+  if (month === 1) {
     year += 1;
   }
 
   var fileName = "◇" + year + "年";
 
   if (day <= 15) {
-    month = (month === 1) ? 12 : month - 1;
-    fileName += (month === 12 ? 1 : month - 1) + ".16-" + month + ".15";
+    var prevMonth = (month === 1) ? 12 : month - 1; // 前の月を別の変数に格納
+    fileName += prevMonth + ".16-" + month + ".15";
   } else {
-    month = (month === 1) ? 12 : month - 1;
-    fileName += month + ".16-" + (month === 12 ? 1 : month + 1) + ".15";
+    var nextMonth = (month === 12) ? 1 : month + 1; // 次の月を別の変数に格納
+    fileName += month + ".16-" + nextMonth + ".15";
   }
 
   fileName += "新勤務表のコピー";
