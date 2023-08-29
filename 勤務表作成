@@ -71,13 +71,30 @@ function manipulateSpreadsheet() {
   var rangeBetweenIJ = shiftSheet.getRange("I1:J" + lastRow);
   rangeBetweenIJ.setBorder(null, null, null, null, true, null, "black", SpreadsheetApp.BorderStyle.DOUBLE); // 二重枠線
 
-  // シート"給与表"に情報を記入
-  var salarySheet = targetSpreadsheet.getSheetByName("給与表");
+  // 給与表シートを取得
+  var salarySheet = newSpreadsheet.getSheetByName("給与表");
   
-  var currentMonth = new Date().getMonth() + 1;
-  var nextMonth = (currentMonth + 1) % 12; // 12月の場合は1になる
+  // A1セルに特定の文字列を書き込む
+  var today = new Date();
+  var nextYear = today.getMonth() === 11 ? today.getFullYear() + 1 : today.getFullYear();
+  var nextMonth = (today.getMonth() + 1) % 12 + 1;
+  var nextNextMonth = (today.getMonth() + 2) % 12 + 1;
+  var salaryTitle = "どさんこワイド朝 " + nextYear + "年" + nextMonth + "月16日～" + nextNextMonth + "月15日分お給料";
+  salarySheet.getRange("A1").setValue(salaryTitle);
   
-  var salaryText = "どさんこワイド!!朝!" + new Date().getFullYear() + "年" + currentMonth + "月16日～" + nextMonth + "月15日分お給料";
+  // "研修"と書かれているセルを見つけて、2行下以降のE列からK列までを空白にする
+  var trainingCells = salarySheet.getRange("A:A").createTextFinder("研修").findAll();
+  trainingCells.forEach(function(cell) {
+    var row = cell.getRow() + 2; // 2行下から
+    var lastRow = salarySheet.getLastRow(); // シートの最後の行
+    var range = salarySheet.getRange(row, 5, lastRow - row + 1, 7); // E列からK列まで
+    range.clearContent(); // セルの内容をクリア
+  });
   
-  salarySheet.getRange("A2").setValue(salaryText);
+  // "残業"と書かれているセルを見つけて、それ以降のL列を全てブランクにする
+  var overtimeCells = salarySheet.getRange("L:L").createTextFinder("残業").findAll();
+  overtimeCells.forEach(function(cell) {
+    var row = cell.getRow() + 1; // 1行下から
+    salarySheet.getRange("L" + (row + 1) + ":L" + salarySheet.getLastRow()).clearContent();
+  });
 }
