@@ -127,7 +127,7 @@ function manipulateSpreadsheet() {
 
 // LINE Notifyを使用してメッセージを送信する関数
 function sendLineNotify(message) {
-  var token = "qevwgZCVh1nmJijfW0sfiX5u3GtlVZkGmVXAsTcIfBf"; // ここにLINE Notifyのトークンを入力
+  var token = "xxxxxxxxxxxxxx"; // ここにLINE Notifyのトークンを入力
   var options = {
     "method"  : "post",
     "payload" : "message=" + encodeURIComponent(message),
