@@ -115,19 +115,26 @@ function manipulateSpreadsheet() {
       salarySheet.getRange(row, col).setFormula(formula);
     }
   }
+
     // スプレッドシートのURLを取得
   var spreadsheetUrl = newSpreadsheet.getUrl();
+
+  // ファイルを取得
+  var file = DriveApp.getFileById(newFileId);
+
+    // アクセス権限を「リンクを知っている全員」で「閲覧者」に
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
 
     // LINE Notifyに送信するメッセージを設定
   var message = "次の勤務表を作成しました。修正点がありましたらお手数ですが直接直してください。\n" + spreadsheetUrl;
 
-  // LINE Notifyに送信
+    // LINE Notifyに送信
   sendLineNotify(message);
 }
 
-// LINE Notifyを使用してメッセージを送信する関数
+  // LINE Notifyを使用してメッセージを送信する関数
 function sendLineNotify(message) {
-  var token = "xxxxxxxxxxxxxx"; // ここにLINE Notifyのトークンを入力
+  var token = "3nKRPJcRiCfWg6GHpx5uno0me66xXHuxTR5I0IELPkA"; // ここにLINE Notifyのトークンを入力
   var options = {
     "method"  : "post",
     "payload" : "message=" + encodeURIComponent(message),
