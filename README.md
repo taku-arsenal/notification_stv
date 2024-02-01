@@ -7,6 +7,9 @@
 - 毎週金曜日の8:00-9:00に通知されます。
 - 使用にはApps Scriptの拡張機能でDrive APIとSpreadsheets APIのインストールが必要になります。
 ### トラブルシューティング
+###### コードにアクセスしたい
+- 指定のアカウントで"Google apps script( https://www.google.com/script/start/ )にアクセス
+-- "start scripting"をクリック
 ###### LINE notifyが退会してしまった
 - LINE notify( https://notify-bot.line.me/my/ )に登録->マイページ->通知botを導入したいグループのアクセストークンを発行->スプレッドシート内のApps Scriptの通知設定部分を発行したアクセストークンへ変更
 ###### スプレッドシートが読み込めない
