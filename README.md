@@ -9,7 +9,7 @@
 ### トラブルシューティング
 ###### コードにアクセスしたい
 - 指定のアカウントで"Google apps script( https://www.google.com/script/start/ )にアクセス
--- "start scripting"をクリック
+    - "start scripting"をクリック
 ###### LINE notifyが退会してしまった
 - LINE notify( https://notify-bot.line.me/my/ )に登録->マイページ->通知botを導入したいグループのアクセストークンを発行->スプレッドシート内のApps Scriptの通知設定部分を発行したアクセストークンへ変更
 ###### スプレッドシートが読み込めない
