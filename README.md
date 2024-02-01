@@ -10,6 +10,8 @@
 ###### コードにアクセスしたい
 - 指定のアカウントで"Google apps script( https://www.google.com/script/start/ )にアクセス
     - "start scripting"をクリック
+        -サイドバーの"自分のプロジェクト"をクリック
+            -"どさ朝シフト通知"をクリックし、任意のコードを編集してください
 ###### LINE notifyを導入したい
 - LINE notify( https://notify-bot.line.me/my/ )に登録->マイページ->通知botを導入したいグループのアクセストークンを発行->スプレッドシート内のApps Scriptの通知設定部分を発行したアクセストークンへ変更
 ###### スプレッドシートが読み込めない
