@@ -104,9 +104,9 @@ function manipulateSpreadsheet() {
   // "合計日数"と記載があるセルの行番号を探す
   var totalDaysRow = salarySheet.getRange("A:A").createTextFinder("合計日数").findNext().getRow();
 
-  // 5行目から"合計日数"の1行上まで、E列からK列の数式を設定
+  // 5行目から"合計日数"の1行上まで、E列からJ列の数式を設定
   for (var row = 5; row < totalDaysRow; row++) {
-    for (var col = 5; col <= 11; col++) { // E列からK列
+    for (var col = 5; col <= 10; col++) { // E列からJ列
       // 当該列の2列左の列名を取得（例：E列ならC列）
       var offsetColName = String.fromCharCode('A'.charCodeAt(0) + col - 2 - 1);
       // 数式を生成
